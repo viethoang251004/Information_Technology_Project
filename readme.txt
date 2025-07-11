@@ -6,4 +6,4 @@
 Để chạy thuật toán truy cập vào hàm Maintest (áp dụng với tất cả thuật toán)
 Dữ liệu nằm ở link: https://drive.google.com/drive/folders/1wIU_O43J2HFLQAFujWPWO25CiSDsNkFU?usp=sharing
 
-1. Đối với ứng dụng Websites, mở folder HUOPMILAlgorithm trên ứng dụng IntelliJ để khởi chạy trang Web. Sau đó  truy cập vào file HuopmilAlgorithmApplicatiopn.java theo đường dẫn "\HUOPMILAlgorithm\src\main\java\com\example\HUOPMILAlgorithm", chạy hàm main trong file này sau đó mở trình duyệt nhập đường dẫn http://localhost:8080/index.html để truy cập vào Website
+2. Đối với ứng dụng Websites, mở folder HUOPMILAlgorithm trên ứng dụng IntelliJ để khởi chạy trang Web. Sau đó  truy cập vào file HuopmilAlgorithmApplicatiopn.java theo đường dẫn "\HUOPMILAlgorithm\src\main\java\com\example\HUOPMILAlgorithm", chạy hàm main trong file này sau đó mở trình duyệt nhập đường dẫn http://localhost:8080/index.html để truy cập vào Website
