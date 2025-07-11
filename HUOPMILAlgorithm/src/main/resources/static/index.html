@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High Utility Occupancy Itemset</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex justify-center items-center min-h-screen">
+<div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">High Utility Occupancy Itemset</h1>
+
+    <form id="mineForm" enctype="multipart/form-data" method="post">
+        <!-- Transaction DB Upload -->
+        <div class="mb-4">
+            <label class="block mb-1">Transaction DB:</label>
+            <input type="file" name="file" id="file" required
+                   class="w-full p-2 bg-gray-700 border border-gray-600 rounded" accept=".txt" />
+        </div>
+
+        <!-- Algorithm Dropdown (fixed to one option) -->
+        <div class="mb-4">
+            <label class="block mb-1">Algorithm:</label>
+            <select disabled class="w-full p-2 bg-gray-700 border border-gray-600 rounded">
+                <option selected>High Utility Occupancy Indexed List</option>
+            </select>
+            <input type="hidden" name="algorithm" value="HUOMIL" />
+        </div>
+
+        <!-- Alpha & Beta Input -->
+        <div class="mb-4">
+            <label class="block mb-1">Thresholds (α and β):</label>
+            <div class="flex space-x-2">
+                <input type="number" name="alpha" placeholder="α" required
+                       class="w-1/2 p-2 bg-gray-700 border border-gray-600 rounded" step="0.01" />
+                <input type="number" name="beta" placeholder="β" required
+                       class="w-1/2 p-2 bg-gray-700 border border-gray-600 rounded" step="0.01" />
+            </div>
+        </div>
+
+        <!-- Mine Button -->
+        <div class="mt-6">
+            <button type="submit"
+                    class="w-full bg-black hover:bg-gray-700 text-white font-bold py-2 rounded">
+                Mine
+            </button>
+        </div>
+    </form>
+
+    <!-- Kết quả -->
+    <div id="result" class="mt-4 text-center text-green-400"></div>
+</div>
+
+<!-- Script xử lý gửi form -->
+<script>
+    document.getElementById("mineForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.textContent = "⏳ Đang xử lý...";
+
+        try {
+            const response = await fetch("/mine", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                resultDiv.textContent = "Có lỗi xảy ra khi khai phá!";
+                return;
+            }
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "result.txt";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            resultDiv.textContent = "Kết quả đã được tải về!";
+        } catch (error) {
+            resultDiv.textContent = "Lỗi mạng hoặc máy chủ!";
+            console.error(error);
+        }
+    });
+</script>
+</body>
+</html>
